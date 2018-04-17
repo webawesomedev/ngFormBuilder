@@ -34417,7 +34417,7 @@ module.exports = function() {
                 '</p>' +
               '</div>';
     },
-    controller: ['$scope', 'BuilderUtils', function($scope, BuilderUtils) {
+    controller: ['$scope', '$http', 'BuilderUtils', function($scope, $http, BuilderUtils) {
       BuilderUtils.uniquify($scope.form, $scope.component);
       $scope.table = $scope.component.key.split('_')[0];
       $scope.field = $scope.component.key.split('_')[1];
