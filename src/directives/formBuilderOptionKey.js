@@ -10,6 +10,18 @@ module.exports = function() {
                 '<div class="alert alert-warning" role="alert" ng-if="!component.isNew">' +
                 'Changing the API key will cause you to lose existing submission data associated with this component.' +
                 '</div>' +
+                '<div class="row">' +
+                '<div class="col-lg-6 form-group">' +
+                '<input type="text" ng-model="table" placeholder="Input Table Name" uib-typeahead="tblName for tblName in getTable($viewValue)" typeahead-loading="loadingTable" typeahead-no-results="noResultsTable" class="form-control">' +
+                '<div ng-show="loadingTable">Loading Tables...</div>' +
+                '<div ng-show="noResultsTable">No Results Found</div>' +
+                '</div>' +
+                '<div class="col-lg-6 form-group">' +
+                '<input type="text" ng-model="field" placeholder="Input Field Name" uib-typeahead="fldName for fldName in getField($viewValue)" typeahead-loading="loadingField" typeahead-no-results="noResultsField" class="form-control">' +
+                '<div ng-show="loadingField">Loading Fields...</div>' +
+                '<div ng-show="noResultsField">No Results Found</div>' +
+                '</div>' +
+                '</div>' +
                 '<label for="key" class="control-label" form-builder-tooltip="The name of this field in the API endpoint.">Property Name</label>' +
                 '<input type="text" class="form-control" id="key" name="key" ng-model="component.key" valid-api-key value="{{ component.key }}" ' +
                 'ng-disabled="component.source" ng-blur="onBlur()">' +
@@ -20,6 +32,36 @@ module.exports = function() {
     },
     controller: ['$scope', 'BuilderUtils', function($scope, BuilderUtils) {
       BuilderUtils.uniquify($scope.form, $scope.component);
+      $scope.table = $scope.component.key.split('_')[0];
+      $scope.field = $scope.component.key.split('_')[1];
+
+      $scope.getTable = function(val) {
+        return $http.get('/example.json', {
+          params: {
+            amount: 25
+          }
+        }).then(function(response) {
+          return response.data.map(function(item) {
+            return item.name;
+          })
+        });
+      };
+
+      $scope.getField = function(val) {
+        return $http.get('/example.json', {
+          params: {
+            amount: 25
+          }
+        }).then(function(response) {
+          return response.data.map(function(item) {
+            return item.name;
+          })
+        });
+      };
+
+      $scope.$watch('table + field', function() {
+        $scope.component.key = $scope.table + '_' + $scope.field;
+      });
 
       $scope.onBlur = function() {
         $scope.component.lockKey = true;
