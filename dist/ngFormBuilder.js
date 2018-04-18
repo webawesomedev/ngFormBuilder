@@ -31325,7 +31325,6 @@ module.exports = function(app) {
     'formioComponentsProvider',
     function(formioComponentsProvider) {
       formioComponentsProvider.register('message', {
-        fbtemplate: 'formio/formbuilder/message.html',
         icon: 'fa fa-code',
         views: [
           {
@@ -31337,6 +31336,7 @@ module.exports = function(app) {
             template: 'formio/components/common/conditional.html'
           }
         ],
+        template: 'formio/formbuilder/message.html',
         documentation: 'http://help.form.io/userguide/#html-element-component'
       });
     }
@@ -31345,7 +31345,7 @@ module.exports = function(app) {
     '$templateCache',
     function($templateCache) {
       $templateCache.put('formio/formbuilder/message.html',
-        '<p ng-if="!component.content">{{ \'Message Element with no content\' | formioTranslate }}</p><p><%{{ component.content }}%></p>'
+        '<p><%{{ component.content }}%></p>'
       );
 
       // Create the settings markup.
