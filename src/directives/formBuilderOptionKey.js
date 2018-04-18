@@ -36,12 +36,12 @@ module.exports = function() {
       $scope.field = $scope.component.key.split('__')[1];
 
       $scope.getTable = function(val) {
-        return $http.get(apiURL + 'IScript_GetRecNames?record=H_TODO', {
+        return $http.get(apiURL + 'IScript_GetRecNames', {
           params: {
             record: val
           }
         }).then(function(response) {
-          return response.records.map(function(item) {
+          return response.data.records.map(function(item) {
             return item.text;
           })
         });
@@ -54,7 +54,7 @@ module.exports = function() {
             field: val
           }
         }).then(function(response) {
-          return response.fields.map(function(item) {
+          return response.data.fields.map(function(item) {
             return item.text;
           })
         });
