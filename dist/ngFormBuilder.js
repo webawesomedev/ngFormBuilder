@@ -31287,6 +31287,7 @@ _dereq_('./selectboxes')(app);
 _dereq_('./select')(app);
 _dereq_('./radio')(app);
 _dereq_('./htmlelement')(app);
+_dereq_('./message')(app);
 _dereq_('./content')(app);
 _dereq_('./button')(app);
 
@@ -31317,7 +31318,69 @@ _dereq_('./panel')(app);
 _dereq_('./table')(app);
 _dereq_('./well')(app);
 
-},{"./address":229,"./button":230,"./checkbox":231,"./columns":232,"./components":233,"./container":234,"./content":235,"./currency":236,"./custom":237,"./datagrid":238,"./datetime":239,"./day":240,"./editgrid":241,"./email":242,"./fieldset":243,"./file":244,"./form":245,"./hidden":246,"./htmlelement":247,"./number":249,"./page":250,"./panel":251,"./password":252,"./phonenumber":253,"./radio":254,"./resource":255,"./select":256,"./selectboxes":257,"./signature":258,"./survey":259,"./table":260,"./textarea":261,"./textfield":262,"./time":263,"./well":264}],249:[function(_dereq_,module,exports){
+},{"./address":229,"./button":230,"./checkbox":231,"./columns":232,"./components":233,"./container":234,"./content":235,"./currency":236,"./custom":237,"./datagrid":238,"./datetime":239,"./day":240,"./editgrid":241,"./email":242,"./fieldset":243,"./file":244,"./form":245,"./hidden":246,"./htmlelement":247,"./message":249,"./number":250,"./page":251,"./panel":252,"./password":253,"./phonenumber":254,"./radio":255,"./resource":256,"./select":257,"./selectboxes":258,"./signature":259,"./survey":260,"./table":261,"./textarea":262,"./textfield":263,"./time":264,"./well":265}],249:[function(_dereq_,module,exports){
+"use strict";
+module.exports = function(app) {
+  app.config([
+    'formioComponentsProvider',
+    function(formioComponentsProvider) {
+      formioComponentsProvider.register('message', {
+        fbtemplate: 'formio/formbuilder/message.html',
+        icon: 'fa fa-code',
+        views: [
+          {
+            name: 'Display',
+            template: 'formio/components/message/display.html'
+          },
+          {
+            name: 'API',
+            template: 'formio/components/common/api.html'
+          },
+          {
+            name: 'Conditional',
+            template: 'formio/components/common/conditional.html'
+          }
+        ],
+        documentation: 'http://help.form.io/userguide/#html-element-component'
+      });
+    }
+  ]);
+  app.run([
+    '$templateCache',
+    function($templateCache) {
+      $templateCache.put('formio/formbuilder/message.html',
+        '<p ng-if="!component.content">{{ \'Message Element with no content\' | formioTranslate }}</p><p><%{{ component.content }}%></p>'
+      );
+
+      // Create the settings markup.
+      $templateCache.put('formio/components/message/display.html',
+        '<ng-form>' +
+        '<form-builder-option property="label"></form-builder-option>' +
+        '<form-builder-option property="hideLabel"></form-builder-option>' +
+        '<form-builder-option property="customClass" label="Container Custom Class"></form-builder-option>' +
+          '<form-builder-option property="tag" label="Message Tag" placeholder="Message Element Tag" title="The tag of this Message element."></form-builder-option>' +
+          '<form-builder-option property="className" label="CSS Class" placeholder="CSS Class" title="The CSS class for this Message element."></form-builder-option>' +
+          '<value-builder ' +
+            'data="component.attrs" ' +
+            'label="Attributes" ' +
+            'tooltip-text="The attributes for this Message element. Only safe attributes are allowed, such as src, href, and title." ' +
+            'value-property="value" ' +
+            'label-property="attr" ' +
+            'value-label="Value" ' +
+            'label-label="Attribute" ' +
+            'no-autocomplete-value="true" ' +
+          '></value-builder>' +
+          '<div class="form-group">' +
+            '<label for="content" form-builder-tooltip="The content of this message element.">{{\'Content\' | formioTranslate}}</label>' +
+            '<textarea class="form-control" id="content" name="content" ng-model="component.content" placeholder="Message Content" rows="3">{{ component.content }}</textarea>' +
+          '</div>' +
+        '</ng-form>'
+      );
+    }
+  ]);
+};
+
+},{}],250:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -31452,7 +31515,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],250:[function(_dereq_,module,exports){
+},{}],251:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -31473,7 +31536,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],251:[function(_dereq_,module,exports){
+},{}],252:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -31588,7 +31651,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],252:[function(_dereq_,module,exports){
+},{}],253:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -31664,7 +31727,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],253:[function(_dereq_,module,exports){
+},{}],254:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -31745,7 +31808,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],254:[function(_dereq_,module,exports){
+},{}],255:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -31825,7 +31888,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],255:[function(_dereq_,module,exports){
+},{}],256:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -31929,7 +31992,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],256:[function(_dereq_,module,exports){
+},{}],257:[function(_dereq_,module,exports){
 "use strict";
 var _clone = _dereq_('lodash/clone');
 module.exports = function(app) {
@@ -32190,7 +32253,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{"lodash/clone":183}],257:[function(_dereq_,module,exports){
+},{"lodash/clone":183}],258:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -32273,7 +32336,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],258:[function(_dereq_,module,exports){
+},{}],259:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -32341,7 +32404,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],259:[function(_dereq_,module,exports){
+},{}],260:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -32415,7 +32478,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],260:[function(_dereq_,module,exports){
+},{}],261:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -32488,7 +32551,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],261:[function(_dereq_,module,exports){
+},{}],262:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -32603,7 +32666,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],262:[function(_dereq_,module,exports){
+},{}],263:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -32738,7 +32801,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],263:[function(_dereq_,module,exports){
+},{}],264:[function(_dereq_,module,exports){
 "use strict";
 var _cloneDeep = _dereq_('lodash/cloneDeep');
 var _each = _dereq_('lodash/each');
@@ -32791,7 +32854,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{"lodash/cloneDeep":184,"lodash/each":188}],264:[function(_dereq_,module,exports){
+},{"lodash/cloneDeep":184,"lodash/each":188}],265:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(app) {
   app.config([
@@ -32839,7 +32902,7 @@ module.exports = function(app) {
   ]);
 };
 
-},{}],265:[function(_dereq_,module,exports){
+},{}],266:[function(_dereq_,module,exports){
 "use strict";
 /**
   * These are component options that can be reused
@@ -33203,7 +33266,7 @@ module.exports = {
   }
 };
 
-},{}],266:[function(_dereq_,module,exports){
+},{}],267:[function(_dereq_,module,exports){
 "use strict";
 module.exports = {
   actions: [
@@ -33278,7 +33341,7 @@ module.exports = {
   ]
 };
 
-},{}],267:[function(_dereq_,module,exports){
+},{}],268:[function(_dereq_,module,exports){
 "use strict";
 /*eslint max-statements: 0*/
 var _cloneDeep = _dereq_('lodash/cloneDeep');
@@ -33693,7 +33756,7 @@ module.exports = ['debounce', function(debounce) {
   };
 }];
 
-},{"lodash/capitalize":182,"lodash/cloneDeep":184,"lodash/each":188,"lodash/groupBy":192,"lodash/merge":212,"lodash/omitBy":214,"lodash/upperFirst":225}],268:[function(_dereq_,module,exports){
+},{"lodash/capitalize":182,"lodash/cloneDeep":184,"lodash/each":188,"lodash/groupBy":192,"lodash/merge":212,"lodash/omitBy":214,"lodash/upperFirst":225}],269:[function(_dereq_,module,exports){
 "use strict";
 /**
  * Create the form-builder-component directive.
@@ -33709,7 +33772,7 @@ module.exports = [
   }
 ];
 
-},{}],269:[function(_dereq_,module,exports){
+},{}],270:[function(_dereq_,module,exports){
 "use strict";
 'use strict';
 var utils = _dereq_('formiojs/utils');
@@ -33805,7 +33868,7 @@ module.exports = [
   }
 ];
 
-},{"formiojs/utils":6,"lodash/get":191,"lodash/reject":218}],270:[function(_dereq_,module,exports){
+},{"formiojs/utils":6,"lodash/get":191,"lodash/reject":218}],271:[function(_dereq_,module,exports){
 "use strict";
 var _isNumber = _dereq_('lodash/isNumber');
 var _camelCase = _dereq_('lodash/camelCase');
@@ -34159,7 +34222,7 @@ module.exports = [
   }
 ];
 
-},{"lodash/assign":180,"lodash/camelCase":181,"lodash/isNumber":202}],271:[function(_dereq_,module,exports){
+},{"lodash/assign":180,"lodash/camelCase":181,"lodash/isNumber":202}],272:[function(_dereq_,module,exports){
 "use strict";
 module.exports = [
   'formioElementDirective',
@@ -34184,7 +34247,7 @@ module.exports = [
   }
 ];
 
-},{}],272:[function(_dereq_,module,exports){
+},{}],273:[function(_dereq_,module,exports){
 "use strict";
 module.exports = [
   function() {
@@ -34209,7 +34272,7 @@ module.exports = [
   }
 ];
 
-},{}],273:[function(_dereq_,module,exports){
+},{}],274:[function(_dereq_,module,exports){
 "use strict";
 /**
 * This directive creates a field for tweaking component options.
@@ -34300,7 +34363,7 @@ module.exports = ['COMMON_OPTIONS', '$filter', function(COMMON_OPTIONS, $filter)
   };
 }];
 
-},{}],274:[function(_dereq_,module,exports){
+},{}],275:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for editing a component's custom validation.
@@ -34341,7 +34404,7 @@ module.exports = function() {
   };
 };
 
-},{}],275:[function(_dereq_,module,exports){
+},{}],276:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for a field to edit a component inputs' label position.
@@ -34383,7 +34446,7 @@ module.exports = function() {
     };
   };
 
-},{}],276:[function(_dereq_,module,exports){
+},{}],277:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for a field to edit a component's key.
@@ -34472,7 +34535,7 @@ module.exports = function() {
   };
 };
 
-},{}],277:[function(_dereq_,module,exports){
+},{}],278:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for a field to edit a component's label position.
@@ -34536,7 +34599,7 @@ module.exports = function() {
     };
   };
 
-},{}],278:[function(_dereq_,module,exports){
+},{}],279:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for a field to edit a component options' label position.
@@ -34578,7 +34641,7 @@ module.exports = function() {
     };
   };
 
-},{}],279:[function(_dereq_,module,exports){
+},{}],280:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for a field to edit a component's shortcut.
@@ -34600,7 +34663,7 @@ module.exports = function() {
   };
 };
 
-},{}],280:[function(_dereq_,module,exports){
+},{}],281:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for a field to edit a component's tags.
@@ -34644,7 +34707,7 @@ module.exports = function() {
   };
 };
 
-},{"lodash/map":210}],281:[function(_dereq_,module,exports){
+},{"lodash/map":210}],282:[function(_dereq_,module,exports){
 "use strict";
 module.exports = [
   function() {
@@ -34666,7 +34729,7 @@ module.exports = [
   }
 ];
 
-},{}],282:[function(_dereq_,module,exports){
+},{}],283:[function(_dereq_,module,exports){
 "use strict";
 /**
  * A directive for a table builder
@@ -34720,7 +34783,7 @@ module.exports = function() {
   };
 };
 
-},{"lodash/merge":212}],283:[function(_dereq_,module,exports){
+},{"lodash/merge":212}],284:[function(_dereq_,module,exports){
 "use strict";
 /**
 * Invokes Bootstrap's popover jquery plugin on an element
@@ -34761,7 +34824,7 @@ module.exports = ['$filter', function($filter) {
   };
 }];
 
-},{}],284:[function(_dereq_,module,exports){
+},{}],285:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive that provides a UI to add {value, label} objects to an array.
@@ -34824,7 +34887,7 @@ module.exports = function() {
   };
 };
 
-},{"lodash/camelCase":181,"lodash/map":210}],285:[function(_dereq_,module,exports){
+},{"lodash/camelCase":181,"lodash/map":210}],286:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function() {
   return {
@@ -34861,7 +34924,7 @@ module.exports = function() {
   };
 };
 
-},{}],286:[function(_dereq_,module,exports){
+},{}],287:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function () {
   return {
@@ -34884,7 +34947,7 @@ module.exports = function () {
   };
 }
 
-},{}],287:[function(_dereq_,module,exports){
+},{}],288:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive that provides a UI to add key-value pair object.
@@ -34957,7 +35020,7 @@ module.exports = function() {
   };
 };
 
-},{}],288:[function(_dereq_,module,exports){
+},{}],289:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive for an input mask for default value.
@@ -35007,7 +35070,7 @@ module.exports = function() {
   };
 };
 
-},{"formiojs/utils":6,"vanilla-text-mask":228}],289:[function(_dereq_,module,exports){
+},{"formiojs/utils":6,"vanilla-text-mask":228}],290:[function(_dereq_,module,exports){
 "use strict";
 /*
 * Prevents user inputting invalid api key characters.
@@ -35030,7 +35093,7 @@ module.exports = function() {
   };
 };
 
-},{}],290:[function(_dereq_,module,exports){
+},{}],291:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive that provides a UI to add {value, label} objects to an array.
@@ -35112,7 +35175,7 @@ module.exports = function() {
   };
 };
 
-},{"lodash/camelCase":181,"lodash/map":210}],291:[function(_dereq_,module,exports){
+},{"lodash/camelCase":181,"lodash/map":210}],292:[function(_dereq_,module,exports){
 "use strict";
 /**
 * A directive that provides a UI to add {value, label} objects to an array.
@@ -35234,7 +35297,7 @@ module.exports = ['BuilderUtils', function(BuilderUtils) {
   }
 ];
 
-},{"lodash/camelCase":181,"lodash/difference":187,"lodash/map":210,"lodash/without":226}],292:[function(_dereq_,module,exports){
+},{"lodash/camelCase":181,"lodash/difference":187,"lodash/map":210,"lodash/without":226}],293:[function(_dereq_,module,exports){
 "use strict";
 'use strict';
 
@@ -35393,7 +35456,7 @@ module.exports = ['FormioUtils', function(FormioUtils) {
   };
 }];
 
-},{"lodash/difference":187,"lodash/range":217}],293:[function(_dereq_,module,exports){
+},{"lodash/difference":187,"lodash/range":217}],294:[function(_dereq_,module,exports){
 "use strict";
 // Create an AngularJS service called debounce
 module.exports = ['$timeout','$q', function($timeout, $q) {
@@ -35427,7 +35490,7 @@ module.exports = ['$timeout','$q', function($timeout, $q) {
   };
 }];
 
-},{}],294:[function(_dereq_,module,exports){
+},{}],295:[function(_dereq_,module,exports){
 "use strict";
 /*! ng-formio-builder v2.32.0 | https://unpkg.com/ng-formio-builder@2.32.0/LICENSE.txt */
 /*global window: false, console: false, jQuery: false */
@@ -35609,5 +35672,5 @@ app.run([
 
 _dereq_('./components');
 
-},{"./components":248,"./constants/commonOptions":265,"./constants/formOptions":266,"./directives/formBuilder":267,"./directives/formBuilderComponent":268,"./directives/formBuilderConditional":269,"./directives/formBuilderDnd":270,"./directives/formBuilderElement":271,"./directives/formBuilderList":272,"./directives/formBuilderOption":273,"./directives/formBuilderOptionCustomValidation":274,"./directives/formBuilderOptionInputsLabelPosition":275,"./directives/formBuilderOptionKey":276,"./directives/formBuilderOptionLabelPosition":277,"./directives/formBuilderOptionOptionsLabelPosition":278,"./directives/formBuilderOptionShortcut":279,"./directives/formBuilderOptionTags":280,"./directives/formBuilderRow":281,"./directives/formBuilderTable":282,"./directives/formBuilderTooltip":283,"./directives/headersBuilder":284,"./directives/jsonInput":285,"./directives/labelValidator":286,"./directives/objectBuilder":287,"./directives/textMask":288,"./directives/validApiKey":289,"./directives/valueBuilder":290,"./directives/valueBuilderWithShortcuts":291,"./factories/BuilderUtils":292,"./factories/debounce":293}]},{},[294])(294)
+},{"./components":248,"./constants/commonOptions":266,"./constants/formOptions":267,"./directives/formBuilder":268,"./directives/formBuilderComponent":269,"./directives/formBuilderConditional":270,"./directives/formBuilderDnd":271,"./directives/formBuilderElement":272,"./directives/formBuilderList":273,"./directives/formBuilderOption":274,"./directives/formBuilderOptionCustomValidation":275,"./directives/formBuilderOptionInputsLabelPosition":276,"./directives/formBuilderOptionKey":277,"./directives/formBuilderOptionLabelPosition":278,"./directives/formBuilderOptionOptionsLabelPosition":279,"./directives/formBuilderOptionShortcut":280,"./directives/formBuilderOptionTags":281,"./directives/formBuilderRow":282,"./directives/formBuilderTable":283,"./directives/formBuilderTooltip":284,"./directives/headersBuilder":285,"./directives/jsonInput":286,"./directives/labelValidator":287,"./directives/objectBuilder":288,"./directives/textMask":289,"./directives/validApiKey":290,"./directives/valueBuilder":291,"./directives/valueBuilderWithShortcuts":292,"./factories/BuilderUtils":293,"./factories/debounce":294}]},{},[295])(295)
 });

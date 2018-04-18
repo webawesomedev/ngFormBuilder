@@ -11,6 +11,7 @@ require('./selectboxes')(app);
 require('./select')(app);
 require('./radio')(app);
 require('./htmlelement')(app);
+require('./message')(app);
 require('./content')(app);
 require('./button')(app);
 
