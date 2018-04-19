@@ -32,8 +32,8 @@ module.exports = function() {
     },
     controller: ['$scope', '$http', 'BuilderUtils', function($scope, $http, BuilderUtils) {
       BuilderUtils.uniquify($scope.form, $scope.component);
-      $scope.table = $scope.component.key.split('__')[0];
-      $scope.field = $scope.component.key.split('__')[1];
+      $scope.table = $scope.component.key.split('-')[0] || '';
+      $scope.field = $scope.component.key.split('-')[1] || '';
 
       $scope.getTable = function(val) {
         return $http.get(apiURL + 'IScript_GetRecNames', {
@@ -61,7 +61,7 @@ module.exports = function() {
       };
 
       $scope.$watch('table + field', function() {
-        $scope.component.key = $scope.table + '__' + $scope.field;
+        $scope.component.key = $scope.table + '-' + $scope.field;
       });
 
       $scope.onBlur = function() {
